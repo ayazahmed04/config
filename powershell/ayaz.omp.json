@@ -1,0 +1,92 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 2,
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "os",
+          "style": "plain",
+          "foreground": "green",
+          "template": "[<#E95420>{{ if .WSL }}WSL at {{ end }}{{.Icon}}</> ",
+          "properties": {
+            "wsl": "",
+            "wsl_separator": ""
+          }
+        },
+        {
+          "type": "envvar",
+          "style": "plain",
+          "powerline_symbol": "\ue0b0",
+          "foreground": "green",
+          "properties": {
+            "postfix": "]",
+            "prefix": "",
+            "var_name": "WSL_DISTRO_NAME"
+          }
+        },
+        {
+          "type": "path",
+          "style": "plain",
+          "foreground": "cyan",
+          "template": " {{ .Path }} ",
+          "properties": {
+            "style": "full"
+          }
+        },
+        {
+          "type": "git",
+          "style": "plain",
+          "foreground": "lightYellow",
+          "template": ":: <lightBlue>\uf1d3 (</>{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}<lightBlue>)</>"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "lightRed",
+          "template": "[ {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }} ]",
+          "properties": {
+            "display_mode": "always",
+            "fetch_version": false,
+            "fetch_virtual_env": true
+          }
+        },
+        {
+          "type": "time",
+          "style": "plain",
+          "foreground": "lightGreen",
+          "template": " {{ .CurrentDate | date .Format }} "
+        }
+      ]
+    },
+    {
+      "type": "newline"
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "exit",
+          "style": "powerline",
+          "foreground": "lightGreen",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}red{{ end }}"
+          ],
+          "template": "➜{{ if gt .Code 0 }}\uf00d{{ else }}\uf42e{{ end }} ",
+          "properties": {
+            "always_enabled": true
+          }
+        }
+      ]
+    }
+  ]
+}
